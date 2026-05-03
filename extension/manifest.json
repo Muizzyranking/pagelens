@@ -1,0 +1,66 @@
+{
+  "manifest_version": 3,
+  "name": "PageLens — AI Summarizer",
+  "version": "1.0.0",
+  "description": "Instantly summarize any webpage with AI. Get bullet-point summaries, key insights, and estimated reading time.",
+
+  "icons": {
+    "16":  "assets/icon16.png",
+    "48":  "assets/icon48.png",
+    "128": "assets/icon128.png"
+  },
+
+  "action": {
+    "default_popup": "popup/popup.html",
+    "default_icon": {
+      "16":  "assets/icon16.png",
+      "48":  "assets/icon48.png",
+      "128": "assets/icon128.png"
+    },
+    "default_title": "PageLens — Summarize this page"
+  },
+
+  "background": {
+    "service_worker": "background/service-worker.js",
+    "type": "module"
+  },
+
+  "content_scripts": [
+    {
+      "matches": ["http://*/*", "https://*/*"],
+      "js": [
+        "content/readability.min.js",
+        "content/content-script.js"
+      ],
+      "css": ["content/highlight.css"],
+      "run_at": "document_idle",
+      "all_frames": false
+    }
+  ],
+
+  "permissions": [
+    "activeTab",
+    "storage",
+    "scripting"
+  ],
+
+  "host_permissions": [
+    "http://localhost:8000/*"
+  ],
+
+  "options_ui": {
+    "page": "settings/settings.html",
+    "open_in_tab": true
+  },
+
+  "content_security_policy": {
+    "extension_pages": "script-src 'self'; object-src 'self'"
+  },
+
+  "web_accessible_resources": [
+    {
+      "resources": ["content/sidebar.html"],
+      "matches": ["http://*/*", "https://*/*"]
+    }
+  ]
+}
