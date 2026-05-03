@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PageLens — Settings</title>
+  <link rel="stylesheet" href="settings.css" />
+</head>
+<body>
+  <div class="page">
+    <header class="page-header">
+      <div class="header-inner">
+        <div class="logo">
+          <svg class="logo-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M12 3C7.03 3 3 7.03 3 12s4.03 9 9 9 9-4.03 9-9-4.03-9-9-9z" fill="currentColor" opacity="0.15"/>
+            <circle cx="12" cy="12" r="3" fill="currentColor"/>
+            <path d="M12 3v3M12 18v3M3 12h3M18 12h3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+          <span>PageLens</span>
+          <span class="badge">Settings</span>
+        </div>
+      </div>
+    </header>
+
+    <main class="main">
+      <div class="settings-grid">
+
+        <!-- Highlights -->
+        <section class="card">
+          <div class="card-header">
+            <h2 class="card-title">Highlights &amp; Sidebar</h2>
+            <p class="card-desc">Use the Highlight and Sidebar buttons in the popup independently. Auto-highlight applies inline highlights automatically when a summary loads.</p>
+          </div>
+          <div class="card-body">
+            <div class="toggle-row">
+              <div class="toggle-text">
+                <span class="toggle-label">Auto-highlight</span>
+                <span class="toggle-hint">Highlight key phrases automatically after summarizing</span>
+              </div>
+              <button class="toggle" role="switch" id="autoHighlightToggle" aria-checked="false">
+                <span class="toggle-knob"></span>
+              </button>
+            </div>
+            <div class="field">
+              <label class="field-label">Sidebar position</label>
+              <div class="segment-control segment-control--2" role="radiogroup" aria-label="Sidebar position" id="sidebarPositionGroup">
+                <label class="segment" data-value="right">
+                  <input type="radio" name="sidebar_position" value="right" class="sr-only"/>
+                  <span class="segment-label">Right</span>
+                  <span class="segment-sub">Default</span>
+                </label>
+                <label class="segment" data-value="left">
+                  <input type="radio" name="sidebar_position" value="left" class="sr-only"/>
+                  <span class="segment-label">Left</span>
+                  <span class="segment-sub">Alternative</span>
+                </label>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Summary -->
+        <section class="card">
+          <div class="card-header">
+            <h2 class="card-title">Summary length</h2>
+            <p class="card-desc">Controls how many bullet points are generated.</p>
+          </div>
+          <div class="card-body">
+            <div class="segment-control" role="radiogroup" aria-label="Summary length" id="summaryLengthGroup">
+              <label class="segment" data-value="brief">
+                <input type="radio" name="summary_length" value="brief" class="sr-only"/>
+                <span class="segment-label">Brief</span>
+                <span class="segment-sub">3 bullets</span>
+              </label>
+              <label class="segment" data-value="standard">
+                <input type="radio" name="summary_length" value="standard" class="sr-only"/>
+                <span class="segment-label">Standard</span>
+                <span class="segment-sub">5 bullets</span>
+              </label>
+              <label class="segment" data-value="detailed">
+                <input type="radio" name="summary_length" value="detailed" class="sr-only"/>
+                <span class="segment-label">Detailed</span>
+                <span class="segment-sub">8 bullets</span>
+              </label>
+            </div>
+          </div>
+        </section>
+
+        <!-- Appearance -->
+        <section class="card">
+          <div class="card-header">
+            <h2 class="card-title">Appearance</h2>
+            <p class="card-desc">Theme preference for the popup.</p>
+          </div>
+          <div class="card-body">
+            <div class="segment-control" role="radiogroup" aria-label="Theme" id="themeGroup">
+              <label class="segment" data-value="auto">
+                <input type="radio" name="theme" value="auto" class="sr-only"/>
+                <span class="segment-label">Auto</span>
+                <span class="segment-sub">System</span>
+              </label>
+              <label class="segment" data-value="dark">
+                <input type="radio" name="theme" value="dark" class="sr-only"/>
+                <span class="segment-label">Dark</span>
+                <span class="segment-sub">Always</span>
+              </label>
+              <label class="segment" data-value="light">
+                <input type="radio" name="theme" value="light" class="sr-only"/>
+                <span class="segment-label">Light</span>
+                <span class="segment-sub">Always</span>
+              </label>
+            </div>
+          </div>
+        </section>
+
+        <!-- Server -->
+        <section class="card">
+          <div class="card-header">
+            <h2 class="card-title">Server</h2>
+            <p class="card-desc">URL of the PageLens FastAPI proxy server.</p>
+          </div>
+          <div class="card-body">
+            <div class="field">
+              <label class="field-label" for="serverUrl">Server URL</label>
+              <input type="url" id="serverUrl" class="field-input" placeholder="http://localhost:8000" spellcheck="false"/>
+            </div>
+            <div class="server-status" id="serverStatus">
+              <span class="status-dot" id="statusDot"></span>
+              <span class="status-text" id="statusText">Not checked</span>
+              <button class="btn-test" id="testServerBtn">Test connection</button>
+            </div>
+          </div>
+        </section>
+
+        <section class="card card--danger">
+          <div class="card-header">
+            <h2 class="card-title">Data</h2>
+            <p class="card-desc">Manage cached summaries stored locally.</p>
+          </div>
+          <div class="card-body">
+            <button class="btn btn--destructive" id="clearCacheBtn">Clear all cached summaries</button>
+          </div>
+        </section>
+
+      </div>
+    </main>
+
+    <div class="save-bar" id="saveBar">
+      <span class="save-msg" id="saveMsg"></span>
+      <button class="btn btn--save" id="saveBtn">Save settings</button>
+    </div>
+  </div>
+
+  <script src="settings.js"></script>
+</body>
+</html>
