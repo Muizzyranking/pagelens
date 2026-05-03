@@ -1,0 +1,29 @@
+# ── Server secrets ────────────────────────────────────────────────────────────
+server/.env
+
+# ── Python ────────────────────────────────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*.pyo
+.venv/
+venv/
+env/
+*.egg-info/
+dist/
+build/
+
+# ── Node (if tooling added later) ─────────────────────────────────────────────
+node_modules/
+.npm/
+
+# ── OS / Editor ───────────────────────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# ── Extension build artifacts ─────────────────────────────────────────────────
+extension/*.zip
+extension/*.crx
